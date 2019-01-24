@@ -88,7 +88,7 @@ class UserInfoRequest(BaseRequest):
 
     Return: <access_token>, <expires_in>, <refresh_token>, <openid>, <scope>
     """
-    request_url = settings.USERINFO
+    request_url = settings.GET_USERINFO
     
     def get_openid(self):
         openid = self.json_response.get("openid", None)

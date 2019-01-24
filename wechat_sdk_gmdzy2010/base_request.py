@@ -24,7 +24,7 @@ class BaseRequest(object):
         is set to INFO."""
         logger = logging.getLogger(__name__)
         logger.setLevel(level=logging.INFO)
-        logger_file = os.path.join(self.logs_path, 'dingtalk_sdk.logs')
+        logger_file = os.path.join(self.logs_path, 'wechat_sdk.logs')
         logger_handler = logging.FileHandler(logger_file)
         logger_handler.setLevel(logging.INFO)
         logger_formatter = logging.Formatter(

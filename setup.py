@@ -13,7 +13,7 @@ setuptools.setup(
     license='MIT License',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    keywords='dingtalk',
+    keywords='wechat',
     url="https://github.com/gmdzy2010/wechat_sdk_gmdzy2010",
     packages=setuptools.find_packages(),
     classifiers=[

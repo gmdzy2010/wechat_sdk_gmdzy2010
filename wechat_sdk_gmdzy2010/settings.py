@@ -1,5 +1,5 @@
 """
-This module contain the global settings for the python sdk of dingtalk
+This module contain the global settings for the python sdk of wechat
 """
 
 
@@ -15,4 +15,4 @@ WEB_AUTH_ACCESS_TOKEN = URL_ROOT + "sns/oauth2/access_token"
 
 WEB_AUTH_REFRESH_TOKEN = URL_ROOT + "sns/oauth2/refresh_token"
 
-USERINFO = URL_ROOT + "sns/userinfo"
+GET_USERINFO = URL_ROOT + "sns/userinfo"
