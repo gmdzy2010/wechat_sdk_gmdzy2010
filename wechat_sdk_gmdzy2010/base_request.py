@@ -26,9 +26,8 @@ class BaseRequest(object):
         logger.setLevel(level=logging.INFO)
         logger_file = os.path.join(self.logs_path, 'wechat_sdk.logs')
         logger_handler = logging.FileHandler(logger_file)
-        logger_handler.setLevel(logging.INFO)
         logger_formatter = logging.Formatter(
-            '[%(asctime)s | %(name)s | %(levelname)s] %(message)s'
+            '[%(asctime)s | %(levelname)s] %(message)s'
         )
         logger_handler.setFormatter(logger_formatter)
         logger.addHandler(logger_handler)
@@ -71,7 +70,7 @@ class BaseRequest(object):
         http://docs.python-requests.org/zh_CN/latest/user/quickstart.html#json
         """
         self.json_response = self.get_response().json()
-        if self.json_response is not None:
+        if self.json_response:
             error_code = self.json_response.get("errcode", None)
             self.call_status = True if error_code == 0 else False
         return self.json_response

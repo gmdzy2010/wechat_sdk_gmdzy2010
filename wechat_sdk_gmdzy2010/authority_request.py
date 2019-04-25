@@ -77,6 +77,11 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
         self.logger.info("%s\t%s" % (self.request_method, self.request_url))
         return access_token
 
+    def get_openid(self):
+        openid = self.json_response.get("openid", None)
+        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
+        return openid
+
 
 class UserInfoRequest(BaseRequest):
     """

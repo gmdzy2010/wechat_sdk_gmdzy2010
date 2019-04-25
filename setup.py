@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="UTF-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="wechatwechat_sdk_gmdzy2010",
+    name="wechat_sdk_gmdzy2010",
     version="0.1.0",
     author="gmdzy2010",
     author_email="gmdzy2010@126.com",
