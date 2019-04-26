@@ -1,1 +1,1 @@
-name = "wechatwechat_sdk_gmdzy2010"
+name = "wechat_sdk_gmdzy2010"

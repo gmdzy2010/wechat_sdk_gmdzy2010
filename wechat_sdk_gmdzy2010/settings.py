@@ -2,6 +2,12 @@
 This module contain the global settings for the python sdk of wechat
 """
 
+import os
+
+
+# logging setting
+
+LOG_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # The root url of dingtalk api
 

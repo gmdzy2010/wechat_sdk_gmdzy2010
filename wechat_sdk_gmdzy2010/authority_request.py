@@ -1,7 +1,9 @@
-from wechat_sdk_gmdzy2010.base_request import BaseRequest
 from wechat_sdk_gmdzy2010 import settings
+from wechat_sdk_gmdzy2010.base_request import BaseRequest
+from wechat_sdk_gmdzy2010.utilites import log_wechat_request
 
 
+@log_wechat_request
 class GlobalAccessTokenRequest(BaseRequest):
     """
     Description: The access token is globally valid within 7200 seconds. To get
@@ -14,16 +16,19 @@ class GlobalAccessTokenRequest(BaseRequest):
     post_data_R: None
     post_data_O: None
 
-    Return: <access_token>, <expires_in>,
+    Return: <access_token>, <expires_in>
     """
     request_url = settings.GLOBAL_ACCESS_TOKEN
     
     def get_access_token(self):
-        access_token = self.json_response.get("access_token", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return access_token
+        json_response = self.get_json_response()
+        if self.call_status:
+            access_token = json_response.get("access_token", None)
+            return access_token
+        return ""
 
 
+@log_wechat_request
 class WebAuthorizationAccessTokenRequest(BaseRequest):
     """
     Description: The access token is globally valid within 7200 seconds. To get
@@ -41,16 +46,21 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
     def get_access_token(self):
-        access_token = self.json_response.get("access_token", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return access_token
-
+        json_response = self.get_json_response()
+        if self.call_status:
+            access_token = json_response.get("access_token", None)
+            return access_token
+        return ""
+    
     def get_refresh_token(self):
-        access_token = self.json_response.get("refresh_token", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return access_token
+        json_response = self.get_json_response()
+        if self.call_status:
+            refresh_token = json_response.get("refresh_token", None)
+            return refresh_token
+        return ""
 
 
+@log_wechat_request
 class WebAuthorizationRefreshTokenRequest(BaseRequest):
     """
     Description: The access token is globally valid within 7200 seconds. To get
@@ -68,24 +78,31 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
     def get_access_token(self):
-        access_token = self.json_response.get("access_token", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return access_token
+        json_response = self.get_json_response()
+        if self.call_status:
+            access_token = json_response.get("access_token", None)
+            return access_token
+        return ""
 
     def get_refresh_token(self):
-        access_token = self.json_response.get("refresh_token", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return access_token
-
+        json_response = self.get_json_response()
+        if self.call_status:
+            refresh_token = json_response.get("refresh_token", None)
+            return refresh_token
+        return ""
+    
     def get_openid(self):
-        openid = self.json_response.get("openid", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return openid
+        json_response = self.get_json_response()
+        if self.call_status:
+            openid = json_response.get("openid", None)
+            return openid
+        return ""
 
 
+@log_wechat_request
 class UserInfoRequest(BaseRequest):
     """
-    parameter_R: <appid>, <grant_type>, <refresh_token>
+    parameter_R: <access_token>, <openid>, <lang>
     parameter_O: None
 
     post_data_R: None
@@ -95,12 +112,9 @@ class UserInfoRequest(BaseRequest):
     """
     request_url = settings.GET_USERINFO
     
-    def get_openid(self):
-        openid = self.json_response.get("openid", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return openid
-
     def get_unionid(self):
-        unionid = self.json_response.get("unionid", None)
-        self.logger.info("%s\t%s" % (self.request_method, self.request_url))
-        return unionid
+        json_response = self.get_json_response()
+        if self.call_status:
+            unionid = json_response.get("unionid", None)
+            return unionid
+        return ""
