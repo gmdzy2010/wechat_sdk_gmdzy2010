@@ -109,7 +109,7 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
             refresh_token = json_response.get("refresh_token", None)
             return refresh_token
         return ""
-    
+
 
 class UserInfoRequest(BaseRequest):
     """
