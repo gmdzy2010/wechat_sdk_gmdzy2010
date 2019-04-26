@@ -2,6 +2,28 @@
 Toolbox for wechat sdk
 """
 
+import logging
+import os
+
+from wechat_sdk_gmdzy2010.settings import LOG_PATH
+
+
+def set_logger(level=logging.INFO):
+    """Method to build the base logging system. By default, logging level
+    is set to INFO."""
+    logger = logging.getLogger(__name__)
+    logger.setLevel(level=level)
+    logger_file = os.path.join(LOG_PATH, 'wechat_sdk.logs')
+    logger_handler = logging.FileHandler(logger_file)
+    logger_formatter = logging.Formatter(
+        '[%(asctime)s | %(levelname)s] %(message)s')
+    logger_handler.setFormatter(logger_formatter)
+    logger.addHandler(logger_handler)
+    return logger
+
+
+LOGGER = set_logger()
+
 
 def log_wechat_request(cls):
     """Decorator for wechat request class."""
@@ -10,11 +32,10 @@ def log_wechat_request(cls):
     origin_getattribute = cls.__getattribute__
     
     def new_getattribute(self, item):
-        if hasattr(self, "request_method") and hasattr(self, "request_url"):
-            log_info = "%s\t%s" % (self.request_method, self.request_url)
-            for base_class in base_classes:
-                if item not in base_class.__dict__:
-                    self.logger.info(log_info)
+        for base_class in base_classes:
+            if item not in base_class.__dict__ and item not in self.__dict__:
+                log_info = "{}".format(cls.request_url)
+                LOGGER.info(log_info)
         return origin_getattribute(self, item)
     
     # return back to the new magic method: __getattribute__
