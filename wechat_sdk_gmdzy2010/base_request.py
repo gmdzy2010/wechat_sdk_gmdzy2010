@@ -11,14 +11,6 @@ class BaseRequest(object):
         "get", "post", "put", "delete", "head", "options", "patch"
     ]
     
-    def __new__(cls, cls_name, bases, attrs):
-        
-        # Ensure initialization is only performed for subclasses of BaseRequest
-        parents = [b for b in bases if isinstance(b, BaseRequest)]
-        if not parents:
-            return super().__new__(cls, cls_name, bases, attrs)
-
-    
     def __init__(self, **kwargs):
         self.kwargs = kwargs
         self.logger = self.set_logger()
