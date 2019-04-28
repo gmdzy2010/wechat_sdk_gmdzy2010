@@ -1,0 +1,9 @@
+.idea/
+.cache/
+__pycache__/
+sdist/
+build/
+dist/
+*.logs
+*.pyc
+test.py
