@@ -19,9 +19,6 @@ class GlobalAccessTokenRequest(BaseRequest):
     request_url = settings.GLOBAL_ACCESS_TOKEN
     
     def get_access_token(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             access_token = json_response.get("access_token", None)
@@ -45,9 +42,6 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
     def get_access_token(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             access_token = json_response.get("access_token", None)
@@ -55,9 +49,6 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
         return ""
     
     def get_refresh_token(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-
         json_response = self.get_json_response()
         if self.call_status:
             refresh_token = json_response.get("refresh_token", None)
@@ -65,14 +56,10 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
         return ""
 
     def get_openid(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             openid = json_response.get("openid", None)
             return openid
-    
         return ""
 
 
@@ -91,9 +78,6 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
     def get_access_token(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             access_token = json_response.get("access_token", None)
@@ -101,9 +85,6 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
         return ""
 
     def get_refresh_token(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             refresh_token = json_response.get("refresh_token", None)
@@ -124,9 +105,6 @@ class UserInfoRequest(BaseRequest):
     request_url = settings.GET_USERINFO
     
     def get_unionid(self):
-        self.logger.info("{}\t{}".format(
-            self.request_method, self.request_url))
-        
         json_response = self.get_json_response()
         if self.call_status:
             unionid = json_response.get("unionid", None)

@@ -66,15 +66,25 @@ class BaseRequest(object):
         return response
     
     def get_json_response(self, encoding="utf-8"):
-        """This method aims at catching the exception of ValueError, detail:
+        """
+        Method to return the json response, topics about the original response
+        and the json response, see the official doc of requests:
         http://docs.python-requests.org/zh_CN/latest/user/quickstart.html#json
         """
         self.json_response = self.get_response(encoding=encoding).json()
         if "errcode" in self.json_response and "errmsg" in self.json_response:
             self.error_code = self.json_response["errcode"]
             self.error_message = self.json_response["errmsg"]
+            
+            # Logging such error
+            log_msg = "{}\t{}".format(self.error_code, self.error_message)
+            self.logger.error(log_msg)
         else:
             self.call_status = True
+            
+            # Logging the request url
+            log_msg = "{}\t{}".format(self.request_method, self.request_url)
+            self.logger.info(log_msg)
         return self.json_response
     
     def get_call_status(self):

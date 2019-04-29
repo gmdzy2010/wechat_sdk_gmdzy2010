@@ -28,6 +28,7 @@ LOGGER = set_logger()
 def log_wechat_request(cls):
     """Decorator for wechat request class."""
     
+    # TODO: 50% performance loss occurs, this is a critical problem.
     base_classes = cls.__bases__
     origin_getattribute = cls.__getattribute__
     
