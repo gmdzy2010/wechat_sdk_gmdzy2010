@@ -51,10 +51,10 @@ class BaseRequest(object):
                 "of [%s] to perform a normal http request, correct it now."
                 "" % (method_str, ", ".join(self.request_methods_valid)))
     
-    def get_response(self, encoding="utf-8"):
+    def get_response(self, **kwargs):
         """Get the original response of requests"""
         request = getattr(requests, self.request_method, None)
-        request.encoding = encoding
+        setattr(request, "encoding", kwargs.get("encoding", "utf-8"))
         if request is None and self._request_method is None:
             raise ValueError("A effective http request method must be set")
         if self.request_url is None:
@@ -65,13 +65,13 @@ class BaseRequest(object):
         self.response = response
         return response
     
-    def get_json_response(self, encoding="utf-8"):
+    def get_json_response(self, **kwargs):
         """
         Method to return the json response, topics about the original response
         and the json response, see the official doc of requests:
         http://docs.python-requests.org/zh_CN/latest/user/quickstart.html#json
         """
-        self.json_response = self.get_response(encoding=encoding).json()
+        self.json_response = self.get_response(**kwargs).json()
         if "errcode" in self.json_response and "errmsg" in self.json_response:
             self.error_code = self.json_response["errcode"]
             self.error_message = self.json_response["errmsg"]

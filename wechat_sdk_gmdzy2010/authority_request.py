@@ -18,12 +18,11 @@ class GlobalAccessTokenRequest(BaseRequest):
     """
     request_url = settings.GLOBAL_ACCESS_TOKEN
     
-    def get_access_token(self):
-        json_response = self.get_json_response()
+    def get_access_token(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             access_token = json_response.get("access_token", None)
             return access_token
-        
         return ""
 
 
@@ -41,22 +40,22 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
     """
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
-    def get_access_token(self):
-        json_response = self.get_json_response()
+    def get_access_token(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             access_token = json_response.get("access_token", None)
             return access_token
         return ""
     
-    def get_refresh_token(self):
-        json_response = self.get_json_response()
+    def get_refresh_token(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             refresh_token = json_response.get("refresh_token", None)
             return refresh_token
         return ""
 
-    def get_openid(self):
-        json_response = self.get_json_response()
+    def get_openid(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             openid = json_response.get("openid", None)
             return openid
@@ -77,15 +76,15 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
     """
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
-    def get_access_token(self):
-        json_response = self.get_json_response()
+    def get_access_token(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             access_token = json_response.get("access_token", None)
             return access_token
         return ""
 
-    def get_refresh_token(self):
-        json_response = self.get_json_response()
+    def get_refresh_token(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             refresh_token = json_response.get("refresh_token", None)
             return refresh_token
@@ -104,8 +103,8 @@ class UserInfoRequest(BaseRequest):
     """
     request_url = settings.GET_USERINFO
     
-    def get_unionid(self):
-        json_response = self.get_json_response()
+    def get_unionid(self, **kwargs):
+        json_response = self.get_json_response(**kwargs)
         if self.call_status:
             unionid = json_response.get("unionid", None)
             return unionid
