@@ -12,16 +12,20 @@ class BaseRequest(object):
     ]
     
     def __init__(self, **kwargs):
-        self.kwargs = kwargs
+        # Set logger
         self.logger = self.set_logger()
+
+        self.kwargs = kwargs
         self.response = None
         self.call_status = False
         self.error_code = None
         self.error_message = None
-        self.json_response = self.get_json_response()
         self._request_method = "get"
         self._request_encoding = "utf-8"
-    
+        
+        # To get JSON response when the request is initialized.
+        self.json_response = self.get_json_response()
+
     def set_logger(self):
         """Method to build the base logging system. By default, logging level
         is set to INFO."""
