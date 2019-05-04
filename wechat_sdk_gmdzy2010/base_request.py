@@ -1,5 +1,7 @@
+import json
 import logging
 import os
+
 import requests
 
 
@@ -91,7 +93,8 @@ class BaseRequest(object):
         and the json response, see the official doc of requests:
         http://docs.python-requests.org/zh_CN/latest/user/quickstart.html#json
         """
-        json_response = self.get_response().json()
+        response = self.get_response().content.decode('UTF-8')
+        json_response = json.loads(response)
         if "errcode" in json_response and "errmsg" in json_response:
             self.error_code = self.json_response["errcode"]
             self.error_message = self.json_response["errmsg"]
