@@ -15,11 +15,12 @@ class BaseRequest(object):
         self.kwargs = kwargs
         self.logger = self.set_logger()
         self.response = None
-        self.json_response = None
         self.call_status = False
         self.error_code = None
         self.error_message = None
+        self.json_response = self.get_json_response()
         self._request_method = "get"
+        self._request_encoding = "utf-8"
     
     def set_logger(self):
         """Method to build the base logging system. By default, logging level
@@ -51,28 +52,43 @@ class BaseRequest(object):
                 "of [%s] to perform a normal http request, correct it now."
                 "" % (method_str, ", ".join(self.request_methods_valid)))
     
-    def get_response(self, **kwargs):
+    @property
+    def request_encoding(self):
+        """Mostly, the get method is used to request wanted json data, as a
+        result, the property of request_method is set to get by default."""
+        return self._request_method
+    
+    @request_encoding.setter
+    def request_encoding(self, encoding):
+        if isinstance(encoding, str):
+            self._request_method = encoding
+        else:
+            raise ValueError("Property of encoding accept only string")
+    
+    def get_response(self):
         """Get the original response of requests"""
         request = getattr(requests, self.request_method, None)
-        setattr(request, "encoding", kwargs.get("encoding", "utf-8"))
+        request.encoding = self.request_encoding
+        
         if request is None and self._request_method is None:
             raise ValueError("A effective http request method must be set")
         if self.request_url is None:
             raise ValueError(
                 "Fatal error occurred, the class property \"request_url\" is"
                 "set to None, reset it with an effective url of wechat api.")
+        
         response = request(self.request_url, **self.kwargs)
         self.response = response
         return response
     
-    def get_json_response(self, **kwargs):
+    def get_json_response(self):
         """
         Method to return the json response, topics about the original response
         and the json response, see the official doc of requests:
         http://docs.python-requests.org/zh_CN/latest/user/quickstart.html#json
         """
-        self.json_response = self.get_response(**kwargs).json()
-        if "errcode" in self.json_response and "errmsg" in self.json_response:
+        json_response = self.get_response().json()
+        if "errcode" in json_response and "errmsg" in json_response:
             self.error_code = self.json_response["errcode"]
             self.error_message = self.json_response["errmsg"]
             
@@ -85,7 +101,7 @@ class BaseRequest(object):
             # Logging the request url
             log_msg = "{}\t{}".format(self.request_method, self.request_url)
             self.logger.info(log_msg)
-        return self.json_response
+        return json_response
     
     def get_call_status(self):
         """The global status of api calling."""

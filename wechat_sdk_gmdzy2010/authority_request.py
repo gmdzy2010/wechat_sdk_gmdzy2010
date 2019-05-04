@@ -18,10 +18,9 @@ class GlobalAccessTokenRequest(BaseRequest):
     """
     request_url = settings.GLOBAL_ACCESS_TOKEN
     
-    def get_access_token(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_access_token(self):
         if self.call_status:
-            access_token = json_response.get("access_token", None)
+            access_token = self.json_response.get("access_token", None)
             return access_token
         return ""
 
@@ -40,24 +39,21 @@ class WebAuthorizationAccessTokenRequest(BaseRequest):
     """
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
-    def get_access_token(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_access_token(self):
         if self.call_status:
-            access_token = json_response.get("access_token", None)
+            access_token = self.json_response.get("access_token", None)
             return access_token
         return ""
     
-    def get_refresh_token(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_refresh_token(self):
         if self.call_status:
-            refresh_token = json_response.get("refresh_token", None)
+            refresh_token = self.json_response.get("refresh_token", None)
             return refresh_token
         return ""
 
-    def get_openid(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_openid(self):
         if self.call_status:
-            openid = json_response.get("openid", None)
+            openid = self.json_response.get("openid", None)
             return openid
         return ""
 
@@ -76,17 +72,15 @@ class WebAuthorizationRefreshTokenRequest(BaseRequest):
     """
     request_url = settings.WEB_AUTH_ACCESS_TOKEN
     
-    def get_access_token(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_access_token(self):
         if self.call_status:
-            access_token = json_response.get("access_token", None)
+            access_token = self.json_response.get("access_token", None)
             return access_token
         return ""
 
-    def get_refresh_token(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_refresh_token(self):
         if self.call_status:
-            refresh_token = json_response.get("refresh_token", None)
+            refresh_token = self.json_response.get("refresh_token", None)
             return refresh_token
         return ""
 
@@ -103,9 +97,8 @@ class UserInfoRequest(BaseRequest):
     """
     request_url = settings.GET_USERINFO
     
-    def get_unionid(self, **kwargs):
-        json_response = self.get_json_response(**kwargs)
+    def get_unionid(self):
         if self.call_status:
-            unionid = json_response.get("unionid", None)
+            unionid = self.json_response.get("unionid", None)
             return unionid
         return ""
