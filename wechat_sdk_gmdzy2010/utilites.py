@@ -1,7 +1,3 @@
-"""
-Toolbox for wechat sdk
-"""
-
 import logging
 import os
 

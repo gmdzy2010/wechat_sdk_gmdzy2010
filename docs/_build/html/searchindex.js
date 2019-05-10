@@ -1,1 +1,0 @@
-Search.setIndex({docnames:["index"],envversion:51,filenames:["index.md"],objects:{},objnames:{},objtypes:{},terms:{"\u641c\u7d22\u9875\u9762":0,"\u6a21\u5757\u7d22\u5f15":0,"\u7d22\u5f15":0},titles:["Welcome to wechat-sdk-gmdzy2010&#8217;s documentation!"],titleterms:{document:0,gmdzy2010:0,indic:0,sdk:0,tabl:0,wechat:0,welcom:0}})
