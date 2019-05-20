@@ -101,7 +101,11 @@ class BaseRequest(object):
             
             # Logging such error
             log_msg = "{}\t{}".format(self.error_code, self.error_message)
-            self.logger.error(log_msg)
+            if self.error_code != 0 and self.error_message != "ok":
+                self.logger.error(log_msg)
+            else:
+                self.call_status = True
+                self.logger.info(log_msg)
         else:
             self.call_status = True
             

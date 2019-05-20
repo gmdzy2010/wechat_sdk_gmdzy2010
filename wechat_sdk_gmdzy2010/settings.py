@@ -22,3 +22,5 @@ WEB_AUTH_ACCESS_TOKEN = URL_ROOT + "sns/oauth2/access_token"
 WEB_AUTH_REFRESH_TOKEN = URL_ROOT + "sns/oauth2/refresh_token"
 
 GET_USERINFO = URL_ROOT + "sns/userinfo"
+
+JS_API_TICKET = URL_ROOT + "cgi-bin/ticket/getticket"

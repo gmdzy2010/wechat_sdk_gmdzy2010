@@ -102,3 +102,22 @@ class UserInfoRequest(BaseRequest):
             unionid = self.json_response.get("unionid", None)
             return unionid
         return ""
+
+
+class JsApiTicketRequest(BaseRequest):
+    """
+    parameter_R: <access_token>, <type>
+    parameter_O: None
+
+    post_data_R: None
+    post_data_O: None
+
+    Return: <errcode>, <errmsg>, <ticket>, <expires_in>
+    """
+    request_url = settings.JS_API_TICKET
+    
+    def get_ticket(self):
+        if self.call_status:
+            ticket = self.json_response.get("ticket", None)
+            return ticket
+        return ""
