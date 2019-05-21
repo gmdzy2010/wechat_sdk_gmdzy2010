@@ -105,6 +105,8 @@ class BaseRequest(object):
                 self.logger.error(log_msg)
             else:
                 self.call_status = True
+                log_msg = "{}\t{}".format(
+                    self.request_method, self.request_url)
                 self.logger.info(log_msg)
         else:
             self.call_status = True

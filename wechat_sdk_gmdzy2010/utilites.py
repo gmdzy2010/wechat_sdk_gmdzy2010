@@ -1,3 +1,4 @@
+import hashlib
 import logging
 import os
 
@@ -38,3 +39,13 @@ def log_wechat_request(cls):
     # return back to the new magic method: __getattribute__
     cls.__getattribute__ = new_getattribute
     return cls
+
+
+def generate_signature(**kwargs):
+    """The method of signature, it takes the sha1 algorithm."""
+    params = ["%s=%s" % (k, v) for k, v in sorted(kwargs.items())]
+    params_string = "&".join(params)
+    params_string_sha1 = hashlib.sha1()
+    params_string_sha1.update(params_string.encode("utf8"))
+    signature = params_string_sha1.hexdigest()
+    return signature

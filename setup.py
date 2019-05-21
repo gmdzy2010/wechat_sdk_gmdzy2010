@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="UTF-8") as fh:
 
 setuptools.setup(
     name="wechat_sdk_gmdzy2010",
-    version="0.3.1",
+    version="0.3.2",
     author="gmdzy2010",
     author_email="gmdzy2010@126.com",
     description="The non-official sdk of wechat",
