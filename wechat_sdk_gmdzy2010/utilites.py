@@ -41,6 +41,12 @@ def log_wechat_request(cls):
     return cls
 
 
+def generate_querystring(**kwargs):
+    params = ["%s=%s" % (k, v) for k, v in kwargs.items()]
+    querystring = "&".join(params)
+    return querystring
+
+
 def generate_signature(**kwargs):
     """The method of signature, it takes the sha1 algorithm."""
     params = ["%s=%s" % (k, v) for k, v in sorted(kwargs.items())]
